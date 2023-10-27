@@ -54,8 +54,8 @@ endif()
 # Note PICO_SDK path is set by the SDK initialization if it occurs above
 if (NOT PICO_SDK)
     find_package(SDL2 2.0.1 REQUIRED)
-    find_package(SDL2_mixer 2.0.0 REQUIRED)
-    find_package(SDL2_net 2.0.0 REQUIRED)
+    #find_package(SDL2_mixer 2.0.0 REQUIRED)
+    #find_package(SDL2_net 2.0.0 REQUIRED)
 
     # Check for libsamplerate.
     find_package(samplerate)
@@ -89,11 +89,13 @@ string(TOLOWER "${PACKAGE_SHORTNAME}" PROGRAM_SPREFIX)
 set(PROGRAM_PREFIX "${PROGRAM_SPREFIX}-")
 
 configure_file(cmake/config.h.cin config.h)
+#include_directories("${CMAKE_CURRENT_BINARY_DIR}")
+
 
 configure_file(src/resource.rc.in src/resource.rc)
 configure_file(src/setup-res.rc.in src/setup-res.rc)
 configure_file(src/setup/setup-manifest.xml.in src/setup/setup-manifest.xml)
 
-foreach(SUBDIR textscreen midiproc opl pcsound src)
+foreach(SUBDIR  midiproc opl src)
     add_subdirectory("${SUBDIR}")
 endforeach()
